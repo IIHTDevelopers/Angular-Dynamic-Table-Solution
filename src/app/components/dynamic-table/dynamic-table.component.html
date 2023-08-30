@@ -1,0 +1,20 @@
+<div>
+    <label for="rows">Rows:</label>
+    <input type="text" id="rows" [(ngModel)]="rows" (input)="onInputChanged('rows')" />
+    <div class="error-message" *ngIf="dirtyFields.rows && (rows === null || rows < 1 || rows > 9)">
+        Please enter a number between 1 and 9 for rows.
+    </div>
+</div>
+<div>
+    <label for="columns">Columns:</label>
+    <input type="text" id="columns" [(ngModel)]="columns" (input)="onInputChanged('columns')" />
+</div>
+<button (click)="createTable()" [disabled]="!canCreateTable">Create Table</button>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+<table *ngIf="tableData">
+    <tbody>
+        <tr *ngFor="let row of tableData">
+            <td *ngFor="let cell of row">{{ cell }}</td>
+        </tr>
+    </tbody>
+</table>
